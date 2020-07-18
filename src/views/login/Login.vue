@@ -50,8 +50,8 @@
       return {
         // 登入表单的数据对象
         loginForm: {
-          username: '',
-          password: '',
+          username: 'admin',
+          password: '123456',
         },
         // 表单验证规则
         loginFormRules: {
@@ -75,12 +75,12 @@
           if (!valid) return
           // 登入请求验证
           getLoginVerify(this.loginForm).then(res => {
-            if (res.data.meta.status !== 200) {
+            if (res.meta.status !== 200) {
               return this.$message.error('登入失败')
             } else {
               this.$message.success('登入成功')
               // 将token保存到客户端中的sessionStorage中
-              window.sessionStorage.setItem('token', res.data.data.token)
+              window.sessionStorage.setItem('token', res.data.token)
               // 跳转路由进入首页
               this.$router.push('/home')
             }

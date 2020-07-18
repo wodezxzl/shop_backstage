@@ -7,5 +7,16 @@ export function request(config) {
     timeout: 5000,
   })
 
+  // 2.请求拦截,添加token
+  instance.interceptors.request.use(config => {
+    config.headers.Authorization = window.sessionStorage.getItem('token')
+    return config
+  })
+
+  // 3.响应拦截
+  instance.interceptors.response.use(res => {
+    return res.data
+  })
+
   return instance(config)
 }
